@@ -1,3 +1,6 @@
+include_recipe "apt::default"
+include_recipe "git::default"
+
 %w{
   git-core
   build-essential
@@ -109,7 +112,7 @@ bash "compile_xbmc_source" do
   code <<-EOH
     ./bootstrap &&
     ./configure #{node['xbmc']['configure_flags'].join(" ")} &&
-    make -j 2 && 
+    make -j 2 &&
     make install
   EOH
 
