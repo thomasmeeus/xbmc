@@ -1,6 +1,8 @@
 include_recipe "apt::default"
 include_recipe "git::default"
 
+
+
 %w{
   git-core
   build-essential
@@ -100,6 +102,7 @@ if node["platform_version"] >= "12.10"
 end
 
 
+
 git "#{node['xbmc']['location']}/xbmc" do
   repository "git://github.com/xbmc/xbmc.git"
   reference "master"
@@ -111,7 +114,7 @@ bash "compile_xbmc_source" do
   cwd "#{node['xbmc']['location']}/xbmc"
   code <<-EOH
     ./bootstrap &&
-    ./configure #{node['xbmc']['configure_flags'].join(" ")} &&
+    ./configure #{node['xbmc']['default_configure_flags'].join(" ")} &&
     make -j 2 &&
     make install
   EOH
@@ -126,4 +129,33 @@ template "/etc/init.d/xbmc" do
     source "xbmc.erb"
     mode 0645
 end
+
+directory  "/home/#{node['xbmc']['user']}/.xbmc/userdata" do
+  owner node["xbmc"]["user"]
+  group node["xbmc"]["group"]
+  mode "0755"
+  recursive true
+  action :create
+end
+
+template "/home/#{node['xbmc']['user']}/.xbmc/userdata/advancedsettings.xml" do
+    source "advancedsettings.xml.erb"
+    owner node['xbmc']['user']
+    group node['xbmc']['group']
+end
+
+
+
+# if node['htpc']['use_mysql_library']
+#   include_recipe "database::mysql"
+
+#   mysql_connection_info = {:host => "localhost", :username => 'root', :password => node['mysql']['server_root_password']}
+
+#   mysql_database "create_user" do
+#     connection mysql_connection_info
+#     sql "CREATE USER 'xbmc' IDENTIFIED BY 'xbmc';GRANT ALL ON *.* TO 'xbmc';"
+#     action :query
+#   end
+# end
+
 
