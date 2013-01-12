@@ -139,6 +139,14 @@ end
 
 template "/home/#{node['xbmc']['user']}/.xbmc/userdata/advancedsettings.xml" do
     source "advancedsettings.xml.erb"
+    mode "0644"
+    owner node['xbmc']['user']
+    group node['xbmc']['group']
+end
+
+template "/home/#{node['xbmc']['user']}/.xbmc/userdata/guisettings.xml" do
+    source "guisettings.xml.erb"
+    mode "0644"
     owner node['xbmc']['user']
     group node['xbmc']['group']
 end
