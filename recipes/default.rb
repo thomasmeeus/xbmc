@@ -1,8 +1,6 @@
 include_recipe "apt::default"
 include_recipe "git::default"
 
-
-
 %w{
   git-core
   build-essential
@@ -86,7 +84,7 @@ include_recipe "git::default"
   end
 end
 
-if node["platform_version"] >= "10.10"
+if node['platform_version'] >= "10.10"
     %w{
         autopoint
         libltdl-dev
@@ -98,9 +96,10 @@ if node["platform_version"] >= "10.10"
 end
 
 if node["platform_version"] >= "12.10"
-  package "libtag1-dev"
+  package "libtag1-dev" do
+    action :upgrade
+  end
 end
-
 
 
 git "#{node['xbmc']['location']}/xbmc" do
@@ -143,19 +142,3 @@ template "/home/#{node['xbmc']['user']}/.xbmc/userdata/advancedsettings.xml" do
     owner node['xbmc']['user']
     group node['xbmc']['group']
 end
-
-
-
-# if node['htpc']['use_mysql_library']
-#   include_recipe "database::mysql"
-
-#   mysql_connection_info = {:host => "localhost", :username => 'root', :password => node['mysql']['server_root_password']}
-
-#   mysql_database "create_user" do
-#     connection mysql_connection_info
-#     sql "CREATE USER 'xbmc' IDENTIFIED BY 'xbmc';GRANT ALL ON *.* TO 'xbmc';"
-#     action :query
-#   end
-# end
-
-

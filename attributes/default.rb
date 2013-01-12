@@ -13,6 +13,8 @@ default["xbmc"]["showexitbutton"] = "false"
 default["xbmc"]["useddsfanart"] = "true"
 default["xbmc"]["cputempcommand"] =""
 default["xbmc"]["gputempcommand"] =""
+default['xbmc']['enable_libshairport']  = "true"
+
 #default['htpc']['use_mysql_library']  = true
 #default['htpc']['xbmc_mysql_password'] = "test"
 
