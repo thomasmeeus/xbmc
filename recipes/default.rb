@@ -150,3 +150,7 @@ template "/home/#{node['xbmc']['user']}/.xbmc/userdata/guisettings.xml" do
     owner node['xbmc']['user']
     group node['xbmc']['group']
 end
+
+bash "update-rc.D" do
+  code "update-rc.d xbmc defaults"
+end
