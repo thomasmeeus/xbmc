@@ -129,6 +129,14 @@ template "/etc/init.d/xbmc" do
     mode 0645
 end
 
+directory  "/home/#{node['xbmc']['user']}/.xbmc" do
+  owner node["xbmc"]["user"]
+  group node["xbmc"]["group"]
+  mode "0755"
+  recursive true
+  action :create
+end
+
 directory  "/home/#{node['xbmc']['user']}/.xbmc/userdata" do
   owner node["xbmc"]["user"]
   group node["xbmc"]["group"]
