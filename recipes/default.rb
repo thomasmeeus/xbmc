@@ -151,6 +151,10 @@ template "/home/#{node['xbmc']['user']}/.xbmc/userdata/guisettings.xml" do
     group node['xbmc']['group']
 end
 
-bash "update-rc.D" do
+service "xbmc" do
+  action :start
+end
+
+bash "update-rc.d" do
   code "update-rc.d xbmc defaults"
 end
