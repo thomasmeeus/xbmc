@@ -159,6 +159,31 @@ template "/home/#{node['xbmc']['user']}/.xbmc/userdata/guisettings.xml" do
     group node['xbmc']['group']
 end
 
+if node['xbmc']['usemysql'] == true
+  include_recipe "database::mysql"
+  include_recipe "database::default"
+
+  mysql_connection_info = {:host => "localhost",
+                         :username => 'root',
+                         :password => node['mysql']['server_root_password']}
+
+  mysql_database_user "#{node['xbmc']['mysql']['username']}" do
+    connection mysql_connection_info
+    password "#{node['xbmc']['mysql']['password']}"
+    action :create
+  end
+
+  mysql_database 'MyVideos' do
+    connection mysql_connection_info
+    action :create
+  end
+
+  mysql_database 'MyMusic' do
+    connection mysql_connection_info
+    action :create
+  end
+end
+
 service "xbmc" do
   action :start
 end

@@ -9,4 +9,23 @@
     <useddsfanart><%= node["xbmc"]["useddsfanart"] %></useddsfanart>
     <cputempcommand><%= node["xbmc"]["cputempcommand"] %></cputempcommand>
     <gputempcommand><%= node["xbmc"]["gputempcommand"] %></gputempcommand>
-</advancedsettings>
+
+    <% if node['xbmc']['usemysql'] -%>
+       <videodatabase>
+           <type>mysql</type>
+           <host><%= node['mysql']['bind_address'] %></host>
+           <port>3306</port>
+           <user><%= node['xbmc']['mysql']['username'] %></user>
+           <pass><%= node['xbmc']['mysql']['password'] %></pass>
+       </videodatabase>
+
+       <musicdatabase>
+           <type>mysql</type>
+           <host><%= node['mysql']['bind_address'] %></host>
+           <port>3306</port>
+           <user><%= node['xbmc']['mysql']['username'] %></user>
+           <pass><%= node['xbmc']['mysql']['password'] %></pass>
+       </musicdatabase>
+
+    </advancedsettings>
+    <% end -%>

@@ -27,3 +27,12 @@ default["xbmc"]["passthroughaac"] ="true"
 default["xbmc"]["truehdpassthrough"] ="true"
 default["xbmc"]["subtitlelanguage"] ="dutch"
 default["xbmc"]["normalizelevels"] = "false"
+
+
+default['xbmc']['usemysql'] = false
+default['mysql']['bind_address'] = "127.0.0.1"
+default['mysql']['server_debian_password'] = "mystrongmysqlrootpassword"
+default['mysql']['server_root_password']   = "mystrongmysqlrootpassword"
+default['mysql']['server_repl_password']   = "mystrongmysqlrootpassword"
+default['xbmc']['mysql']['username'] = "xbmc"
+default['xbmc']['mysql']['password'] = "mystrongxbmcrootpassword"
