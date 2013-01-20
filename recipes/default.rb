@@ -167,8 +167,8 @@ template "/home/#{node['xbmc']['user']}/.xbmc/userdata/sources.xml" do
 end
 
 if node['xbmc']['usemysql'] == true
+  include_recipe "mysql::server"
   include_recipe "database::mysql"
-  include_recipe "database::default"
 
   mysql_connection_info = {:host => "localhost",
                          :username => 'root',
