@@ -189,6 +189,13 @@ if node['xbmc']['usemysql'] == true
     connection mysql_connection_info
     action :create
   end
+
+  mysql_database_user "#{node['xbmc']['mysql']['username']}" do
+    connection mysql_connection_info
+    password "#{node['xbmc']['mysql']['password']}"
+    action :grant
+  end
+
 end
 
 service "xbmc" do
