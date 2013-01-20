@@ -36,3 +36,12 @@ default['mysql']['server_root_password']   = "mystrongmysqlrootpassword"
 default['mysql']['server_repl_password']   = "mystrongmysqlrootpassword"
 default['xbmc']['mysql']['username'] = "xbmc"
 default['xbmc']['mysql']['password'] = "mystrongxbmcrootpassword"
+
+default['xbmc']['videosources'] = [
+                                              {   "name" => "TV-Shows",
+                                                  "path" => "/media/TV-Shows/"
+                                               },
+                                              {   "name" => "Movies",
+                                                  "path" => "/media/Movies/"
+                                               }
+                                      ]

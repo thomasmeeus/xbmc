@@ -159,6 +159,13 @@ template "/home/#{node['xbmc']['user']}/.xbmc/userdata/guisettings.xml" do
     group node['xbmc']['group']
 end
 
+template "/home/#{node['xbmc']['user']}/.xbmc/userdata/sources.xml" do
+    source "sources.xml.erb"
+    mode "0644"
+    owner node['xbmc']['user']
+    group node['xbmc']['group']
+end
+
 if node['xbmc']['usemysql'] == true
   include_recipe "database::mysql"
   include_recipe "database::default"
